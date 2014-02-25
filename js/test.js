@@ -297,18 +297,18 @@ Game = {
 
 Ark = {
   Defaults: {
-    width:        696,
-    height:       800,
+    width:        624,
+    height:       725,
     wallWidth:    2,
     paddleWidth:  100,
     paddleHeight: 10,
-    blockWidth:   58,
-    blockHeight:  29,
-    bottomMargin: 10,
+    blockWidth:   52,
+    blockHeight:  26,
+    bottomMargin: 15,
     paddleSpeed:  1,
     ballSpeed:    2,
-    ballMaxSpeed: 1,
-    ballMinSpeed: 3,
+    ballMaxSpeed: 1.5,
+    ballMinSpeed: 2.5,
     ballAccel:    0,
     ballRadius:   7,
     lives:        5
@@ -509,7 +509,7 @@ Ark = {
   },
 
   launch: function() {
-    if (this.playing && this.lives > 0) {
+    if (this.playing && this.lives > 0 && !this.ball.playing) {
       this.ball.launch();
     }
   },
@@ -589,19 +589,19 @@ Ark = {
     }
   },
 
-  devicemotion: function(ev) {
-    var x = ev.acceleration.x,
-      y = ev.acceleration.y;
+  devicemotion: function(e) {
+    var x = e.gamma,
+      p = this.paddle;
 
       if(x > 1) {
-        this.paddle.stopMovingLeft();
-        this.paddle.moveRight(x/4);
+        p.stopMovingLeft();
+        p.moveRight(x/4);
       } else if(x < -1) {
-        this.paddle.stopMovingRight();
-        this.paddle.moveLeft(-x/4);
+        p.stopMovingRight();
+        p.moveLeft(-x/4);
       } else {
-        this.paddle.stopMovingLeft();
-        this.paddle.stopMovingRight();
+        p.stopMovingLeft();
+        p.stopMovingRight();
       }
   },
 

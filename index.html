@@ -21,9 +21,8 @@
     Game.ready(function() {
       ark = Game.start('game', Ark, {});
 
-      window.addEventListener("devicemotion", function(event) {
-        ark.devicemotion(event);
-      }, true);
+      window.addEventListener('deviceorientation', ark.devicemotion.bind(ark), false);
+
     });
   </script>
 
