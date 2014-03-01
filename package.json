@@ -1,0 +1,16 @@
+{
+  "name": "BerryNoid",
+  "version": "0.0.1",
+  "author": {
+    "name": "Ander Rodriguez",
+    "email": "AnderRodriguezVarela@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anderRV/berrynoid.git"
+  },
+  "private": true,
+  "devDependencies": {
+    "connect": "~2.13.0"
+  }
+}
