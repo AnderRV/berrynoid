@@ -297,6 +297,7 @@ Game = {
 
 Ark = {
   Defaults: {
+    // stats:        true,
     width:        624,
     height:       725,
     wallWidth:    2,
@@ -307,8 +308,8 @@ Ark = {
     bottomMargin: 15,
     paddleSpeed:  1,
     ballSpeed:    2,
-    ballMaxSpeed: 1.5,
-    ballMinSpeed: 2.5,
+    ballMaxSpeed: 1.75,
+    ballMinSpeed: 2.25,
     ballAccel:    0,
     ballRadius:   7,
     lives:        5
@@ -318,6 +319,7 @@ Ark = {
     walls:             'white',
     lives:             'white',
     paused:            'red',
+    won:               'red',
     unbreakableBlocks: 'gray',
     ball:              'white'
   },
@@ -343,6 +345,7 @@ Ark = {
       this.ball        = Object.construct(Ark.Ball,   this);
       this.blocks      = [];
       this.isPaused    = false;
+      this.won         = false;
       this.level       = 0;
       this.images      = {};
 
@@ -404,12 +407,12 @@ Ark = {
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 2
-          [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0], // 3
+          [0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 0, 0], // 3
           [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0], // 4
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 5
+          [0, 3, 3, 1, 1, 1, 1, 1, 1, 3, 3, 0], // 5
           [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 6
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 7
-          [0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0], // 8
+          [0, 1, 1, 1, 1, 2, 2, 1, 1, 1, 1, 0], // 7
+          [0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0], // 8
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 9
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 10
         ];
@@ -418,14 +421,14 @@ Ark = {
         matrix = [
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-          [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], // 2
+          [0, 2, 2, 0, 0, 2, 2, 0, 0, 2, 2, 0], // 2
           [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], // 3
           [0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], // 4
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 5
+          [0, 1, 1, 3, 3, 1, 1, 3, 3, 1, 1, 0], // 5
           [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 6
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 7
+          [0, 1, 1, 1, 1, 3, 3, 1, 1, 1, 1, 0], // 7
           [0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0], // 8
-          [0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0], // 9
+          [0, 0, 0, 2, 2, 0, 0, 2, 2, 0, 0, 0], // 9
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 10
         ];
         break;
@@ -433,22 +436,22 @@ Ark = {
         matrix = [
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 2
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 3
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 4
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 5
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 6
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 7
-          [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0], // 8
-          [0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0], // 9
+          [0, -1, -1, 0, 1, 1, 1, 1, 0, -1, -1, 0], // 2
+          [0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0], // 3
+          [0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0], // 4
+          [0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0], // 5
+          [0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0], // 6
+          [0, 1, 1, 3, 1, 2, 2, 1, 3, 1, 1, 0], // 7
+          [0, 2, 2, 1, 2, 0, 0, 2, 1, 2, 2, 0], // 8
+          [0, 3, 3, 3, 3, 0, 0, 3, 3, 3, 3, 0], // 9
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 10
         ];
         break;
       case 3:
         matrix = [
           [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 0
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 1
-          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // 2
+          [0, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 0], // 1
+          [0, 0, 3, 2, 0, 0, 0, 0, 2, 3, 0, 0], // 2
           [0, 3, 2, 1, 0, 1, 1, 0, 1, 2, 3, 0], // 3
           [0, 1, 1, 1, 0, 2, 2, 0, 1, 1, 1, 0], // 4
           [0, 1, 1, 1, 0, 3, 3, 0, 1, 1, 1, 0], // 5
@@ -464,7 +467,7 @@ Ark = {
         break;
     }
 
-    if(matrix) {
+    if(matrix && matrix.length > 0) {
       var //rowLen = this.cfg.width / this.cfg.blockWidth,
         //columnLen = (this.cfg.height/2) / this.cfg.blockHeight,
         columnLen = matrix.length,
@@ -480,6 +483,10 @@ Ark = {
             }
         };
       };
+
+      return true;
+    } else {
+      return false;
     }
   },
 
@@ -514,11 +521,14 @@ Ark = {
     }
   },
 
-  stop: function(ask) {
+  stop: function(ask, force) {
     if (this.playing) {
       if (!ask || this.runner.confirm('Abandon game in progress ?')) {
         this.playing = false;
         this.runner.showCursor();
+        if (force) {
+          this.runner.stop();
+        }
       }
     }
   },
@@ -562,6 +572,14 @@ Ark = {
       ctx.fillStyle = Ark.Colors.paused;
       ctx.fillText("PAUSED", this.width - 20, 10);
     }
+
+    if(this.won) {
+      ctx.fillStyle = Ark.Colors.won;
+      ctx.textAlign = 'center';
+      ctx.font = "30pt Arial";
+      ctx.fillText("YOU WIN!", (this.width/2), (this.height/2));
+      ctx.textAlign = 'left';
+    }
   },
 
   onkeydown: function(keyCode) {
@@ -593,12 +611,12 @@ Ark = {
     var x = e.gamma,
       p = this.paddle;
 
-      if(x > 1) {
+      if(x > 8) {
         p.stopMovingLeft();
-        p.moveRight(x/4);
-      } else if(x < -1) {
+        p.moveRight(x/22);
+      } else if(x < -8) {
         p.stopMovingRight();
-        p.moveLeft(-x/4);
+        p.moveLeft(-x/22);
       } else {
         p.stopMovingLeft();
         p.stopMovingRight();
@@ -618,10 +636,14 @@ Ark = {
     };
 
     if(isFinished) {
-      this.playing = false;
       this.level += 1;
-      this.createBlocks(this.level);
-      this.ball.reset();
+      if (this.createBlocks(this.level)) {
+        this.playing = false;
+        this.ball.reset();
+      } else {
+        this.won = true;
+        this.stop(false, true);
+      }
     }
   },
 
