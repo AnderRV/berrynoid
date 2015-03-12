@@ -3,14 +3,15 @@ importScripts('/js/serviceworker-cache-polyfill.js');
 var CACHE_NAME = 'berrynoid-v1';
 var urlsToCache = [
   '/',
-  '/css/ark.css',
-  '/js/berrynoid.js',
-  '/js/quo.js',
-  '/js/serviceworker-cache-polyfill.js',
-  '/block_0.png',
-  '/block_1.png',
-  '/block_2.png',
-  '/block_3.png'
+  'berrynoid/',
+  'css/ark.css',
+  'js/berrynoid.js',
+  'js/quo.js',
+  'js/serviceworker-cache-polyfill.js',
+  'block_0.png',
+  'block_1.png',
+  'block_2.png',
+  'block_3.png'
 ];
 
 self.addEventListener('install', function(event) {
