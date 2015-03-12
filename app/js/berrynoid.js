@@ -40,7 +40,9 @@ if (!Object.extend) {
   };
 }
 
-//
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js');
+}
 
 //=============================================================================
 // GAME
