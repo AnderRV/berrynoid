@@ -1,4 +1,4 @@
-importScripts('/js/serviceworker-cache-polyfill.js');
+importScripts('./js/serviceworker-cache-polyfill.js');
 
 var CACHE_NAME = 'berrynoid-v1';
 var urlsToCache = [
