@@ -1,12 +1,14 @@
 importScripts('./js/serviceworker-cache-polyfill.js');
 
-var CACHE_NAME = 'berrynoid-v1';
+var CACHE_NAME = 'berrynoid-v2';
 var urlsToCache = [
   './',
   './css/ark.css',
   './js/berrynoid.js',
   './js/quo.js',
   './js/serviceworker-cache-polyfill.js',
+  './favicon.ico',
+  './icon.png',
   './block_0.png',
   './block_1.png',
   './block_2.png',
