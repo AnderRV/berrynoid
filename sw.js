@@ -8,7 +8,7 @@ var urlsToCache = [
   'js/quo.js',
   'js/serviceworker-cache-polyfill.js',
   'favicon.ico',
-  'icon.png',
+  'icon-192.png',
   'block_0.png',
   'block_1.png',
   'block_2.png',
